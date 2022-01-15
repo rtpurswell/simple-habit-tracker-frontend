@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media only screen and (orientation: landscape) {
+  body {
+    overflow: hidden;
+  }
+  .landscape-message {
+    visibility: visible !important;
+  }
+}
+.landscape-message {
+  visibility: hidden;
+}
+.oneHundreth {
+  width: 3%;
+  font-size: 0.7rem;
+  line-height: 0.7rem;
+}
+.circleSlideMiddle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.boxShadow {
+  -webkit-filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
+  filter: drop-shadow(3px 3px 2px rgba(0, 0, 0, 0.7));
+}
+.slidePageLeft-enter {
+  transform: translateX(-100%);
+}
+.slidePageLeft-enter-active {
+  transform: translateX(0%);
+  transition: all 0.5s ease;
+}
+.slidePageLeft-exit {
+}
+.slidePageLeft-exit-active {
+  transform: translateX(-100%);
+  transition: all 0.5s ease;
+}
+.slidePageBottom-enter {
+  transform: translateY(200%);
+}
+.slidePageBottom-enter-active {
+  transform: translateY(0%);
+  transition: all 0.5s ease;
+}
+.slidePageBottom-exit {
+}
+.slidePageBottom-exit-active {
+  transform: translateY(200%);
+  transition: all 0.5s ease;
+}
+.buttonSlideLeft {
+  transform: translateX(-243px);
+  transition: all 0.5s ease;
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
