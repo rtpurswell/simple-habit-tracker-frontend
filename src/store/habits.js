@@ -458,56 +458,57 @@ const selectGetStreaks = createSelector(
       let longestStreak = 0
       let currentStreak = 0
       let lastCompleted = null
-      sortableRecords.sort((a, b) => {
-        if (a.completedAt < b.completedAt) return -1
-        if (a.completedAt > b.completedAt) return 1
-        return 0
-      })
-
-      sortableRecords.forEach((record) => {
-        if (!lastCompleted) {
-          lastCompleted = record.completedAt
-          currentStreak = 1
-        } else {
-          if (
-            moment(lastCompleted).tz(timeZone).format('YYYY-MM-DD') ===
-            moment(record.completedAt)
-              .tz(timeZone)
-              .add(-1, 'days')
-              .format('YYYY-MM-DD')
-          ) {
-            currentStreak += 1
-          } else if (
-            moment(lastCompleted)
-              .tz(timeZone)
-              .isBefore(
-                moment(record.completedAt)
-                  .tz(timeZone)
-                  .add(-1, 'days')
-                  .format('YYYY-MM-DD'),
-              )
-          ) {
+      if (sortableRecords.length > 0) {
+        sortableRecords.sort((a, b) => {
+          if (a.completedAt < b.completedAt) return -1
+          if (a.completedAt > b.completedAt) return 1
+          return 0
+        })
+        sortableRecords.forEach((record) => {
+          if (!lastCompleted) {
+            lastCompleted = record.completedAt
             currentStreak = 1
+          } else {
+            if (
+              moment(lastCompleted).tz(timeZone).format('YYYY-MM-DD') ===
+              moment(record.completedAt)
+                .tz(timeZone)
+                .add(-1, 'days')
+                .format('YYYY-MM-DD')
+            ) {
+              currentStreak += 1
+            } else if (
+              moment(lastCompleted)
+                .tz(timeZone)
+                .isBefore(
+                  moment(record.completedAt)
+                    .tz(timeZone)
+                    .add(-1, 'days')
+                    .format('YYYY-MM-DD'),
+                )
+            ) {
+              currentStreak = 1
+            }
+            lastCompleted = record.completedAt
           }
-          lastCompleted = record.completedAt
-        }
-        if (currentStreak > longestStreak) longestStreak = currentStreak
-      })
+          if (currentStreak > longestStreak) longestStreak = currentStreak
+        })
 
-      if (
-        moment(sortableRecords[sortableRecords.length - 1].completedAt)
-          .tz(timeZone)
-          .format('YYYY-MM-DD') !==
-          moment().tz(timeZone).format('YYYY-MM-DD') &&
-        moment(sortableRecords[sortableRecords.length - 1].completedAt)
-          .tz(timeZone)
-          .format('YYYY-MM-DD') !==
-          moment().tz(timeZone).add(-1, 'days').format('YYYY-MM-DD')
-      ) {
-        currentStreak = 0
+        if (
+          moment(sortableRecords[sortableRecords.length - 1].completedAt)
+            .tz(timeZone)
+            .format('YYYY-MM-DD') !==
+            moment().tz(timeZone).format('YYYY-MM-DD') &&
+          moment(sortableRecords[sortableRecords.length - 1].completedAt)
+            .tz(timeZone)
+            .format('YYYY-MM-DD') !==
+            moment().tz(timeZone).add(-1, 'days').format('YYYY-MM-DD')
+        ) {
+          currentStreak = 0
+        }
+        streaks.currentStreak = currentStreak
+        streaks.longestStreak = longestStreak
       }
-      streaks.currentStreak = currentStreak
-      streaks.longestStreak = longestStreak
     }
 
     return streaks
