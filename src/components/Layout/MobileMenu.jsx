@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getLoggedIn } from '../../store/auth'
 import Button from '../common/Button'
 import SlidePage from '../common/SlidePage'
-
+import { useAuth0 } from '@auth0/auth0-react'
 function MobileMenu(props) {
+  const { isAuthenticated, logout } = useAuth0()
   const loggedIn = useSelector(getLoggedIn)
   const dispatch = useDispatch()
 
@@ -40,13 +41,10 @@ function MobileMenu(props) {
             Forgot
           </Link>
 
-          {loggedIn && (
+          {isAuthenticated && (
             <Button
               color="cancel"
-              onClick={() => {
-                props.handleMenuToggle()
-                dispatch(logUserOut())
-              }}
+              onClick={() => logout({ returnTo: window.location.origin })}
             >
               Log Out
             </Button>

@@ -35,8 +35,10 @@ function Habit(props) {
           {name}
         </h3>
       </div>
+      <div className="w-1/3">
+        <RecordButton _habitId={_id} color={color} preview={preview} />
+      </div>
 
-      <RecordButton _habitId={_id} color={color} preview={preview} />
       {!preview ? (
         <EditHabit
           handleClose={handleEditClose}

@@ -3,7 +3,9 @@ import { apiCallBegan } from './api'
 
 const initialState = {
   loggedIn: false,
+  tokenValid: false,
   user: {},
+  error401count: 0,
   forgotPasswordSent: false,
   forgotPasswordKey: {
     valid: false,
@@ -16,8 +18,12 @@ const slice = createSlice({
   name: 'auth',
   initialState: initialState,
   reducers: {
+    error401: (auth, action) => {
+      auth.error401count = auth.error401count + 1
+    },
     userLoggedIn: (auth, action) => {
       auth.user = action.payload
+      auth.tokenValid = true
       auth.loggedIn = true
     },
     userLoggedOut: (auth, action) => {
@@ -25,6 +31,10 @@ const slice = createSlice({
       auth.user = initialState.user
       auth.forgotPasswordKey = initialState.forgotPasswordKey
       auth.forgotPasswordSent = initialState.forgotPasswordSent
+      auth.tokenValid = false
+    },
+    tokenInvalid: (auth, action) => {
+      auth.tokenValid = false
     },
     passwordResetSent: (auth, action) => {
       auth.forgotPasswordSent = true
@@ -59,9 +69,13 @@ export const {
   passwordKeyRejected,
   passwordResetLoading,
   passwordResetFromKey,
+  tokenInvalid,
+  error401,
 } = slice.actions
 export const jwtReceived = createAction('auth/jwtReceived')
 export const logUserOut = createAction('auth/logUserOut')
+
+export const tokenReceived = createAction('auth/tokenReceived')
 
 export default slice.reducer
 
@@ -110,7 +124,14 @@ export const resetPasswordFromKey = (_userId, key, password) =>
   })
 
 //Selectors
-
+export const getErrorCount = createSelector(
+  (state) => state.auth.error401count,
+  (error401count) => error401count,
+)
+export const getTokenValid = createSelector(
+  (state) => state.auth.tokenValid,
+  (tokenValid) => tokenValid,
+)
 export const getLoggedIn = createSelector(
   (state) => state.auth.loggedIn,
   (loggedIn) => loggedIn,

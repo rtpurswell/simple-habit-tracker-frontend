@@ -5,16 +5,28 @@ import { loginUser } from '../../store/auth'
 import Button from '../common/Button'
 import BoxContainer from '../common/BoxContainer'
 import Title from '../common/Title'
+import { useAuth0 } from '@auth0/auth0-react'
 
 function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
+  const { loginWithRedirect } = useAuth0()
   const dispatch = useDispatch()
 
   const handleSubmit = (e) => {
     dispatch(loginUser(email, password))
   }
+  return (
+    <div>
+      <Button
+        onClick={() => {
+          loginWithRedirect()
+        }}
+      >
+        Login
+      </Button>
+    </div>
+  )
   return (
     <BoxContainer>
       <Title>Log In</Title>

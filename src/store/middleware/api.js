@@ -2,8 +2,9 @@ import axios from 'axios'
 import { apiCallBegan, apiCallFailed } from '../api'
 import { toast } from 'react-toastify'
 import config from '../config'
-import { userLoggedOut } from '../auth'
+import { userLoggedOut, error401 } from '../auth'
 import { resetHabits } from '../habits'
+
 const api = ({ dispatch }) => (next) => async (action) => {
   if (action.type !== apiCallBegan.type && action.type !== apiCallFailed.type)
     return next(action)
@@ -40,8 +41,8 @@ const api = ({ dispatch }) => (next) => async (action) => {
       if (error.response) {
         if (error.response.status === 401) {
           localStorage.removeItem('habit_auth_token')
-          localStorage.removeItem('habit_refresh_token')
-
+          message = 'Invalid Token'
+          dispatch(error401())
           dispatch(userLoggedOut())
           dispatch(resetHabits())
         } else {

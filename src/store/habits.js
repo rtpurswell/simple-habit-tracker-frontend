@@ -119,7 +119,9 @@ export const loadHabits = () => (dispatch, getState) => {
       apiCallBegan({
         baseURL: config.apiEndPoint,
         url,
-        headers: { 'x-auth-token': localStorage.getItem('habit_auth_token') },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('habit_auth_token')}`,
+        },
         onStart: habitsLoading.type,
         onSuccess: habitsReceived.type,
         onError: errorLoadingHabits.type,
@@ -132,7 +134,9 @@ export const reloadHabit = (habit) => {
   return apiCallBegan({
     baseURL: config.apiEndPoint,
     url: `${url}/${habit._id}`,
-    headers: { 'x-auth-token': localStorage.getItem('habit_auth_token') },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('habit_auth_token')}`,
+    },
     onSuccess: habitUpdated.type,
   })
 }
@@ -142,7 +146,9 @@ export const updateHabit = (habit) => {
     baseURL: config.apiEndPoint,
     url: `${url}/${habit._id}`,
     method: 'put',
-    headers: { 'x-auth-token': localStorage.getItem('habit_auth_token') },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('habit_auth_token')}`,
+    },
     data: _.pick(habit, ['name', 'color']),
     onSuccess: habitUpdated.type,
     onSuccessToast: 'Habit Updated',
@@ -153,7 +159,9 @@ export const addHabit = (habit) => {
     baseURL: config.apiEndPoint,
     url,
     method: 'post',
-    headers: { 'x-auth-token': localStorage.getItem('habit_auth_token') },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('habit_auth_token')}`,
+    },
     data: _.pick(habit, ['name', 'color']),
     onSuccess: habitAdded.type,
     onSuccessToast: 'Habit Added',
@@ -164,7 +172,9 @@ export const removeHabit = (habit) => {
     baseURL: config.apiEndPoint,
     url: `${url}/${habit._id}`,
     method: 'delete',
-    headers: { 'x-auth-token': localStorage.getItem('habit_auth_token') },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('habit_auth_token')}`,
+    },
     onSuccess: habitRemoved.type,
     onSuccessToast: 'Habit Removed',
   })
@@ -175,7 +185,9 @@ export const loadRecords = () => {
   return apiCallBegan({
     baseURL: config.apiEndPoint,
     url: recordsURL,
-    headers: { 'x-auth-token': localStorage.getItem('habit_auth_token') },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('habit_auth_token')}`,
+    },
     onSuccess: recordsReceived.type,
   })
 }
@@ -185,7 +197,9 @@ export const addRecordNow = (habitId) => {
     baseURL: config.apiEndPoint,
     url: recordsURL,
     method: 'post',
-    headers: { 'x-auth-token': localStorage.getItem('habit_auth_token') },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('habit_auth_token')}`,
+    },
     data: { _habitId: habitId },
     onSuccess: recordAdded.type,
     onSuccessToast: 'Record Added',
@@ -196,7 +210,9 @@ export const addRecordPast = (habitId, timestamp) => {
     baseURL: config.apiEndPoint,
     url: recordsURL,
     method: 'post',
-    headers: { 'x-auth-token': localStorage.getItem('habit_auth_token') },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('habit_auth_token')}`,
+    },
     data: { _habitId: habitId, completedAt: timestamp },
     onSuccess: recordAdded.type,
     onSuccessToast: 'Record Added',
@@ -207,7 +223,9 @@ export const removeRecord = (recordId) => {
     baseURL: config.apiEndPoint,
     url: `${recordsURL}/${recordId}`,
     method: 'delete',
-    headers: { 'x-auth-token': localStorage.getItem('habit_auth_token') },
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('habit_auth_token')}`,
+    },
     onSuccess: recordRemoved.type,
     onSuccessToast: 'Record Removed',
   })
