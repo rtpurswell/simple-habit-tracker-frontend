@@ -1,14 +1,9 @@
 import { Link } from 'react-router-dom'
-import { logUserOut } from '../../store/auth'
-import { useDispatch, useSelector } from 'react-redux'
-import { getLoggedIn } from '../../store/auth'
 import Button from '../common/Button'
 import SlidePage from '../common/SlidePage'
 import { useAuth0 } from '@auth0/auth0-react'
 function MobileMenu(props) {
   const { isAuthenticated, logout } = useAuth0()
-  const loggedIn = useSelector(getLoggedIn)
-  const dispatch = useDispatch()
 
   return (
     <SlidePage in={props.menuOpen} direction="inLeft" isMain={true}>
@@ -32,13 +27,6 @@ function MobileMenu(props) {
             onClick={props.handleMenuToggle}
           >
             Home
-          </Link>
-          <Link
-            to="/forgotPassword"
-            className="p-3 w-full hover:bg-gray-500"
-            onClick={props.handleMenuToggle}
-          >
-            Forgot
           </Link>
 
           {isAuthenticated && (
