@@ -91,7 +91,9 @@ function MapCircleSlide(props) {
       setSelectedRecord(record)
     }
   }
-
+  if (habits.length === 0 && timemap.length > 0) {
+    return null
+  }
   const drawPie = () => {
     //Uses 24 length array to represent 24 hours in a day
     //Finds if there are any records for that hour and creates 2 Paths. 1 is a transparent pie shape for events and the other is the shape for the colors on the outside
@@ -125,9 +127,7 @@ function MapCircleSlide(props) {
                   const habitIndex = habits.findIndex(
                     (habit) => habit._id === record._habitId,
                   )
-
                   const habit = habits[habitIndex]
-
                   return (
                     <g key={`circleSlidePath${record._id}`}>
                       <path
