@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+
 import MobileMenu from './MobileMenu'
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -12,14 +12,12 @@ function Navbar() {
     <nav className=" bg-gray-600  p-1 flex items-center max-h-20 ">
       <div className="flex w-2/3 items-center max-h-20 min-h-20">
         <div className="w-3/8">
-          <Link to="/">
-            <img
-              src="/logo.png"
-              className="max-h-20 "
-              style={{ minWidth: '80px' }}
-              alt="Logo"
-            />
-          </Link>
+          <img
+            src="/logo.png"
+            className="max-h-20 "
+            style={{ minWidth: '80px' }}
+            alt="Logo"
+          />
         </div>
         <div className="flex-grow h-fit font-bold text-orange-400">
           Habit Tracker
