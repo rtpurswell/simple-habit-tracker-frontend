@@ -46,13 +46,15 @@ function SlidePage(props) {
       nodeRef={nodeRef}
     >
       <div
-        className={`flex flex-col fixed top-0 left-0 bg-gray-800 overflow-y-scroll ${
+        className={`flex flex-col fixed top-0 left-0 bg-gray-800 justify-center items-center ${
           props.isMain ? 'z-50' : ''
         }`}
         style={mainStyle}
         ref={nodeRef}
       >
-        {props.children}
+        <div className="md:w-1/2 md:bg-gray-700 rounded md:p-5 overflow-y-scroll w-screen h-screen md:h-fit ">
+          {props.children}
+        </div>
       </div>
     </CSSTransition>
   )
