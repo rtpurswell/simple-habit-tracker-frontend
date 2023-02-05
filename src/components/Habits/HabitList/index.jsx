@@ -79,11 +79,11 @@ function HabitList() {
   }
 
   return (
-    <React.Fragment>
+    <div className="md:bg-gray-700 rounded md:p-5 lg:col-span-2">
       <AddHabit isOpen={addHabitOpen} handleClose={handleAddHabitToggle} />
 
       {content}
-    </React.Fragment>
+    </div>
   )
 }
 

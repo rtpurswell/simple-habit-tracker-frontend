@@ -2,17 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@media only screen and (orientation: landscape) {
-  body {
-    overflow: hidden;
-  }
-  .landscape-message {
-    visibility: visible !important;
-  }
-}
-.landscape-message {
-  visibility: hidden;
-}
+
 .oneHundreth {
   width: 3%;
   font-size: 0.7rem;
@@ -70,4 +60,26 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  border-radius: 0.25rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #353535;
+  border-radius: 0.25rem;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 0.25rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

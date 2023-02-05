@@ -11,11 +11,13 @@ function Main() {
 
   const content = (
     <LoadStore>
-      <RecordViewSelector />
-      <HabitList />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 p-3 lg:grid-cols-3">
+        <RecordViewSelector />
+        <HabitList />
+      </div>
     </LoadStore>
   )
-  return <div>{loggedIn ? content : <Login />}</div>
+  return <main>{loggedIn ? content : <Login />}</main>
 }
 
 export default Main

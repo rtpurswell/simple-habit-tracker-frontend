@@ -17,7 +17,7 @@ function RecordViewSelector() {
     setIsOpen(!isOpen)
   }
   return (
-    <div className="flex flex-col p-1">
+    <div className="flex flex-col p-1 md:bg-gray-700 md:rounded md:max-w-2xl md:p-5">
       <div className="flex w-full ">
         <div className="flex">
           <Title>My Records</Title>

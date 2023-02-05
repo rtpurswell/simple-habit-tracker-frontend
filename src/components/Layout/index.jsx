@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import Navbar from './Navbar'
 import Main from '../Main'
-import { Route, Routes } from 'react-router-dom'
 import {
   getTokenValid,
   tokenReceived,
@@ -47,23 +46,15 @@ function Layout(props) {
   }, [tokenValid, isAuthenticated])
 
   return (
-    <div className=" text-slate-50 bg-gray-800 min-h-screen">
+    <div className=" text-slate-50">
       {isLoading ? (
         <Loading />
       ) : (
-        <React.Fragment>
-          <div className="landscape-message  fixed top-0 left-0 bg-gray-800 h-screen w-screen flex justify-center items-center z-50">
-            <Title>Please turn back to protrait view</Title>
-          </div>
+        <>
           <Navbar />
-
-          <main className="">
-            <Routes>
-              <Route path="/" element={<Main />} />
-            </Routes>
-          </main>
+          <Main />
           {props.children}
-        </React.Fragment>
+        </>
       )}
     </div>
   )

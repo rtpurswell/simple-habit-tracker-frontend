@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import Button from '../common/Button'
 import SlidePage from '../common/SlidePage'
 import { useAuth0 } from '@auth0/auth0-react'
@@ -21,14 +20,6 @@ function MobileMenu(props) {
         </div>
         <hr />
         <div className=" flex flex-col ">
-          <Link
-            to="/"
-            className="p-3 w-full hover:bg-gray-500"
-            onClick={props.handleMenuToggle}
-          >
-            Home
-          </Link>
-
           {isAuthenticated && (
             <Button
               color="cancel"
